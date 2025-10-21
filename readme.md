@@ -39,9 +39,8 @@ streamlit run app.py
 | Karnali | Chisapani | 42,890 km² | Bardiya |
 | Kankai | Mainachuli | 1,148 km² | Jhapa |
 
-## 🔧 Configuration
-
-### ERA5 API Setup (Optional)
+## Configuration
+### ERA5 API Setup
 
 For real climate data, configure Copernicus CDS API:
 
@@ -54,7 +53,7 @@ key: YOUR_UID:YOUR_API_KEY
 
 Without API setup, the system uses realistic synthetic data.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 nepal-flood-intelligence/
@@ -73,7 +72,7 @@ nepal-flood-intelligence/
 └── README.md
 ```
 
-##  Output
+## Output
 
 ![Description of image](Output/Img1.png)
 ![Description of image](Output/Img2.png)
