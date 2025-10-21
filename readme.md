@@ -73,40 +73,9 @@ nepal-flood-intelligence/
 └── README.md
 ```
 
-##  Tech Stack
+##  Output
 
-- **Frontend**: Streamlit
-- **ML Framework**: PyTorch
-- **Data Processing**: Pandas, NumPy
-- **Visualization**: Plotly
-- **Climate Data**: ERA5 Reanalysis (Copernicus)
+![Flood Map 1](output/img1.png)
+![Flood Map 2](output/img2.png)
+![Flood Map 3](output/img3.png)
 
-##  Dashboard Tabs
-
-1. **Overview**: Current conditions and recent flood events
-2. **Historical Analysis**: 5-year trends and statistics
-3. **Monsoon Risk**: Seasonal risk profiling
-4. **Forecast**: 7-day LSTM predictions
-5. **Flood Timing**: Multi-year seasonal patterns
-6. **Flash Flood Analysis**: Top 1% extreme events
-
-## 🤝 Contributing
-
-Contributions welcome! Please open an issue or submit a PR.
-
-## 📝 License
-
-MIT License - see LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- ERA5 data: Copernicus Climate Change Service
-- River data: Nepal Department of Hydrology & Meteorology
-
-## 📧 Contact
-
-For questions or collaborations, open an issue or reach out via email.
-
----
-
-**⚠️ Disclaimer**: This tool is for research and educational purposes. Always consult official sources for flood warnings and emergency response.
