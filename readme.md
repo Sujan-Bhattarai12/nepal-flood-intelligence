@@ -75,6 +75,6 @@ nepal-flood-intelligence/
 
 ##  Output
 
-![Description of image](Output/Img1.png)!(output/img1.png)
-![Description of image](Output/Img2.png)!(output/img2.png)
-![Description of image](Output/Img3.png)!(output/img3.png)
+![Description of image](Output/Img1.png)
+![Description of image](Output/Img2.png)
+![Description of image](Output/Img3.png)
