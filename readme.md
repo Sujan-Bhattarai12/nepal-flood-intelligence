@@ -75,7 +75,7 @@ nepal-flood-intelligence/
 
 ##  Output
 
-![Flood Map 1](output/img1.png)
+![Flood Map 1](Output/img1.png)
 ![Flood Map 2](output/img2.png)
 ![Flood Map 3](output/img3.png)
 
