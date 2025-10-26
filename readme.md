@@ -15,20 +15,6 @@ Real-time flood forecasting and risk analysis for Nepal's major river basins usi
 - **Flash Flood Detection**: Identify extreme events and timing patterns
 - **Smart Caching**: Instant load times with 24-hour data refresh
 
-##  Quick Start
-
-```bash
-# Clone repository
-git clone https://github.com/yourusername/nepal-flood-intelligence.git
-cd nepal-flood-intelligence
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run dashboard
-streamlit run app.py
-```
-
 ##  River Stations
 
 | River | Station | Drainage Area | District |
@@ -50,9 +36,6 @@ For real climate data, configure Copernicus CDS API:
 url: https://cds.climate.copernicus.eu/api/v2
 key: YOUR_UID:YOUR_API_KEY
 ```
-
-Without API setup, the system uses realistic synthetic data.
-
 ## Project Structure
 
 ```
