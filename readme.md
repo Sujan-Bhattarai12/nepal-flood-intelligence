@@ -60,3 +60,13 @@ nepal-flood-intelligence/
 ![Description of image](Output/Img1.png)
 ![Description of image](Output/Img2.png)
 ![Description of image](Output/Img3.png)
+
+
+## How to Run
+1. Clone the repo  
+   `git clone https://github.com/Sujan-Bhattarai12/nepal-flood-intelligence.git`
+2. Install dependencies  
+   `pip install -r requirements.txt`
+3. Run the app  
+   `streamlit run app.py`
+
