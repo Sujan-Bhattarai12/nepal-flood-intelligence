@@ -36,6 +36,12 @@ For real climate data, configure Copernicus CDS API:
 url: https://cds.climate.copernicus.eu/api/v2
 key: YOUR_UID:YOUR_API_KEY
 ```
+
+## Output
+![Description of image](Output/Img1.png)
+![Description of image](Output/Img2.png)
+![Description of image](Output/Img3.png)
+
 ## Project Structure
 
 ```
@@ -54,12 +60,6 @@ nepal-flood-intelligence/
 ├── requirements.txt
 └── README.md
 ```
-
-## Output
-
-![Description of image](Output/Img1.png)
-![Description of image](Output/Img2.png)
-![Description of image](Output/Img3.png)
 
 
 ## How to Run
