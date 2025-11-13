@@ -1,12 +1,19 @@
-numpy
-pandas
-scikit-learn
-xgboost
-matplotlib
-seaborn
-statsmodels
-dowhy
-shap
-joblib
-jinja2
-imbalanced-learn
+# Core Dependencies
+streamlit>=1.28.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Deep Learning
+torch>=2.0.0
+
+# Data Visualization
+plotly>=5.14.0
+matplotlib>=3.7.0
+
+# Climate Data
+cdsapi>=0.6.1
+xarray>=2023.1.0
+netCDF4>=1.6.3
+
+# Utilities
+python-dateutil>=2.8.2
