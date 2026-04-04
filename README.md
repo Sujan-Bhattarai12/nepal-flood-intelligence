@@ -55,52 +55,6 @@ nepal-flood-intelligence/
     └── dashboard.py              # Streamlit UI components
 ```
 
-## Setup
-
-### Prerequisites
-
-- Python 3.8+
-- pip
-- A Copernicus CDS API account ([register here](https://cds.climate.copernicus.eu))
-
-### Step 1 — Clone the Repository
-
-```bash
-git clone https://github.com/<your-username>/nepal-flood-intelligence.git
-cd nepal-flood-intelligence
-```
-
-### Step 2 — Create a Virtual Environment
-
-```bash
-python -m venv venv
-source venv/bin/activate        # Linux / macOS
-venv\Scripts\activate           # Windows
-```
-
-### Step 3 — Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4 — Configure CDS API Access
-
-Create a `.cdsapirc` file in your home directory with your Copernicus credentials:
-
-```
-url: https://cds.climate.copernicus.eu/api/v2
-key: <your-uid>:<your-api-key>
-```
-
-### Step 5 — Run the Application
-
-```bash
-streamlit run app.py
-```
-
-The dashboard will open at `http://localhost:8501`.
-
 ## Development Notebooks
 
 Each stage of the pipeline has a corresponding notebook for exploration and prototyping:
