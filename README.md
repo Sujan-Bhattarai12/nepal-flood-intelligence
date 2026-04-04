@@ -1,16 +1,10 @@
 # Nepal Flood Intelligence Platform
 
-Nepal loses lives and livelihoods to floods every monsoon season. The five major river basins — Bagmati, Koshi, Narayani, Karnali, and Kankai — together drain over 130,000 square kilometers of Himalayan terrain and regularly flood downstream communities with little warning.
+A real-time flood forecasting and risk analysis system for Nepal's five major river basins. The platform monitors water levels and discharge at gauging stations across the Bagmati, Koshi, Narayani, Karnali, and Kankai rivers, generates seven-day discharge forecasts, and identifies flood events from five years of historical records.
 
-This platform is a real-time flood forecasting and risk analysis system built to address that gap. It monitors water levels and discharge across five river gauging stations, generates seven-day flood forecasts using a deep learning model trained on ERA5 climate reanalysis data from the Copernicus Climate Change Service, and identifies extreme events and seasonal flood patterns from five years of historical records.
+## Problem
 
-## Features
-
-- Real-time monitoring of water levels and discharge for 5 major river basins
-- Seven-day flood forecasts powered by an LSTM deep learning model trained on ERA5 climate reanalysis data
-- Flash flood detection with severity classification and risk analysis
-- Five-year historical trend analysis and seasonal pattern identification
-- Local data caching for fast load times and offline resilience during flood events
+Nepal's monsoon season causes recurring flood damage across downstream communities in the Terai region. Existing monitoring infrastructure provides limited lead time for evacuations and emergency response. This platform addresses that gap by combining climate reanalysis data with a time-series forecasting model to produce actionable seven-day outlooks for five critical river basins.
 
 ## River Monitoring Stations
 
@@ -22,149 +16,125 @@ This platform is a real-time flood forecasting and risk analysis system built to
 | Karnali | Chisapani | 43,900 km² | Bardiya |
 | Kankai | Mainachuli | 1,148 km² | Jhapa |
 
-## Dashboard Preview
+## System Architecture
 
-### Overview Dashboard
-![Dashboard Overview](docs/images/dashboard-overview.png)
+Data flows through the system in five stages:
 
-### Forecast Analysis
-![Forecast Dashboard](docs/images/dashboard-forecast.png)
-
-### Historical Analysis
-![Analysis Dashboard](docs/images/dashboard-analysis.png)
-
-## How It Works
-
-The system pulls precipitation and atmospheric data from the ERA5 climate reanalysis archive via the Copernicus CDS API. That data feeds a Long Short-Term Memory (LSTM) neural network — a class of deep learning model well suited to time-series prediction — which produces discharge forecasts with confidence intervals for each station. A flood detection algorithm then classifies events by severity and flags high-risk periods for emergency planners.
-
-The architecture is modular: data loading, flood analytics, model inference, and the dashboard interface are each maintained as separate components, making it straightforward to extend the system to new river basins or integrate additional data sources.
-
-## Quick Start
-
-### Prerequisites
-
-- Python 3.8 or higher
-- pip package manager
-
-### Installation
-
-1. Clone the repository
-
-```bash
-git clone https://github.com/Sujan-Bhattarai12/nepal-flood-intelligence.git
-cd nepal-flood-intelligence
-```
-
-2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-3. Configure ERA5 API (Optional)
-
-For live climate data, register at [Copernicus CDS](https://cds.climate.copernicus.eu) and create `~/.cdsapirc`:
-
-```
-url: https://cds.climate.copernicus.eu/api/v2
-key: YOUR_UID:YOUR_API_KEY
-```
-
-The system runs on synthetic data by default for testing and demonstration purposes.
-
-4. Run the application
-
-```bash
-streamlit run app.py
-```
-
-5. Open in browser
-
-Navigate to `http://localhost:8501`
+1. **Data Ingestion** — Precipitation and atmospheric variables are fetched from the ERA5 climate reanalysis archive via the Copernicus CDS API.
+2. **Preprocessing** — Raw discharge values are converted to water levels using rating curve equations calibrated to each station.
+3. **Flood Detection** — A statistical algorithm scans the processed time series for threshold exceedances and classifies events by severity (minor, moderate, severe).
+4. **Forecasting** — An LSTM (Long Short-Term Memory) neural network, trained on five years of ERA5 data, produces seven-day discharge forecasts with confidence intervals for each station.
+5. **Visualization** — Results are rendered as interactive Plotly charts in a Streamlit dashboard.
 
 ## Project Structure
 
 ```
 nepal-flood-intelligence/
-├── app.py                          # Main Streamlit application entry point
+├── app.py                          # Streamlit application entry point
 ├── requirements.txt                # Python dependencies
-├── README.md                       # Project documentation
+├── README.md
 ├── archive/
 │   └── app_original.py            # Legacy monolithic version
 ├── assets/
-│   └── images/                    # Application assets
+│   └── images/
 │       └── river-background.jpg
-├── cache/                         # Data and model cache (auto-generated)
+├── cache/                         # Auto-generated data and model cache
 ├── docs/
 │   └── images/                    # Documentation screenshots
-├── notebooks/                     # Development notebooks
+├── notebooks/
 │   ├── 01-era5-data-collection.ipynb
 │   ├── 02-flood-event-analysis.ipynb
 │   ├── 03-lstm-model-training.ipynb
 │   └── 04-visualization-development.ipynb
-└── src/                           # Core package
-    ├── __init__.py               # Package exports
-    ├── config.py                 # Configuration and constants
-    ├── data_loader.py            # ERA5 data loading and caching
-    ├── analytics.py              # Flood detection algorithms
-    ├── models.py                 # PyTorch LSTM architecture
+└── src/
+    ├── __init__.py
+    ├── config.py                 # Station definitions, LSTM hyperparameters
+    ├── data_loader.py            # ERA5 data fetching and local caching
+    ├── analytics.py              # Flood detection and severity classification
+    ├── models.py                 # PyTorch LSTM model definition and inference
     └── dashboard.py              # Streamlit UI components
 ```
 
-## Architecture
+## Setup
 
-The platform is built around four core components:
+### Prerequisites
 
-- **config.py** — System configuration, river station definitions, and LSTM hyperparameters
-- **data_loader.py** — ERA5 climate data fetching and local cache management
-- **analytics.py** — Flood event detection, severity classification, and risk analysis
-- **models.py** — Deep learning models for flood forecasting (LSTM)
-- **dashboard.py** — Interactive Streamlit dashboard components
+- Python 3.8+
+- pip
+- A Copernicus CDS API account ([register here](https://cds.climate.copernicus.eu))
 
-Data flows through the system in five stages: ERA5 reanalysis data is fetched via the Copernicus CDS API, transformed using rating curve methods to convert discharge into water levels, analyzed for flood events and severity, passed through the LSTM for seven-day forecasting, and rendered as interactive Plotly charts in the Streamlit dashboard.
+### Step 1 — Clone the Repository
 
-## Configuration
+```bash
+git clone https://github.com/<your-username>/nepal-flood-intelligence.git
+cd nepal-flood-intelligence
+```
 
-River station parameters, drainage basin areas, geographic coordinates, flood thresholds, and LSTM model hyperparameters are all defined in `src/config.py`. The data cache is stored in the `cache/` directory and refreshes automatically every 24 hours for observational data and every 7 days for model weights.
+### Step 2 — Create a Virtual Environment
 
-## Development
+```bash
+python -m venv venv
+source venv/bin/activate        # Linux / macOS
+venv\Scripts\activate           # Windows
+```
 
-Individual components can be explored through the development notebooks:
+### Step 3 — Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4 — Configure CDS API Access
+
+Create a `.cdsapirc` file in your home directory with your Copernicus credentials:
+
+```
+url: https://cds.climate.copernicus.eu/api/v2
+key: <your-uid>:<your-api-key>
+```
+
+### Step 5 — Run the Application
+
+```bash
+streamlit run app.py
+```
+
+The dashboard will open at `http://localhost:8501`.
+
+## Development Notebooks
+
+Each stage of the pipeline has a corresponding notebook for exploration and prototyping:
+
+| Notebook | Purpose |
+|----------|---------|
+| `01-era5-data-collection.ipynb` | Climate data fetching and preprocessing |
+| `02-flood-event-analysis.ipynb` | Statistical analysis and event detection |
+| `03-lstm-model-training.ipynb` | Model training, validation, and hyperparameter tuning |
+| `04-visualization-development.ipynb` | Chart prototyping and layout design |
+
+To run:
 
 ```bash
 jupyter notebook notebooks/01-era5-data-collection.ipynb
 ```
 
-- **01-era5-data-collection** — Climate data fetching and preprocessing
-- **02-flood-event-analysis** — Statistical analysis and event detection
-- **03-lstm-model-training** — Deep learning model development
-- **04-visualization-development** — Chart prototyping and design
+## Key Dependencies
 
-## Dependencies
+| Package | Role |
+|---------|------|
+| Streamlit | Web dashboard |
+| PyTorch | LSTM model training and inference |
+| Plotly | Interactive charts |
+| Pandas, NumPy | Data processing |
+| cdsapi | Copernicus CDS API client |
+| xarray, netCDF4 | Climate data file handling |
 
-- **Streamlit** — Interactive web dashboard
-- **PyTorch** — Deep learning framework for LSTM models
-- **Plotly** — Interactive data visualizations
-- **Pandas / NumPy** — Data manipulation and analysis
-- **cdsapi** — Copernicus Climate Data Store API client
-- **xarray / netCDF4** — Climate data file handling
+Full list with pinned versions in `requirements.txt`.
 
-See `requirements.txt` for the complete list with version constraints.
+## Data Source
 
-## Intended Use
+All climate data is sourced from the [ERA5 reanalysis dataset](https://cds.climate.copernicus.eu) produced by the Copernicus Climate Change Service (C3S). River station metadata is based on records from the Nepal Department of Hydrology and Meteorology.
 
-The platform is designed for use by emergency management agencies, hydrologists, and local authorities who need actionable forecasts rather than raw model output. All code is open source under the MIT License.
+## License
 
-## Contributing
-
-Contributions are welcome. Please feel free to submit issues or pull requests.
-
-## Acknowledgments
-
-- **ERA5 Data** — [Copernicus Climate Change Service](https://cds.climate.copernicus.eu)
-- **River Data** — Nepal Department of Hydrology and Meteorology
-- **Framework** — Built with Streamlit and PyTorch
-
-## Contact
-
-For questions or feedback, please open an issue on GitHub.
+MIT
